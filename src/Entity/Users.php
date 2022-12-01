@@ -7,6 +7,7 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +27,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $telephone;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
@@ -48,12 +52,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 150)]
     private $city;
 
-    #[ORM\Column(type: 'boolean')]
-    private $is_verified = false;
-
-    #[ORM\Column(type: 'string', length: 100)]
-    private $resetToken;
-
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private $orders;
 
@@ -66,6 +64,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+
+    public function setTelephone(string $telephone) 
+    {
+         $this->telephone = $telephone;
+    }
+
+    public function getTelephone(): ?string
+    {
+         return $this->telephone;
     }
 
     public function getEmail(): ?string

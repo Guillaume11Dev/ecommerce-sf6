@@ -7,6 +7,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Faker;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class ProductsFixtures extends Fixture
 {
@@ -33,6 +36,24 @@ class ProductsFixtures extends Fixture
             $manager->persist($product);
         }
 
+        $product = new Products();
+        $product->setName(" MSI 29.5\" LED - Optix MAG301CR2 ");
+        $product->setDescription("2560 x 1080 pixels - 1 ms (MPRT) - 21/9 - Dalle VA incurvée - 200 Hz - RGB - FreeSync - HDMI/DisplayPort/USB-C - Pivot - Noir");
+        $product->setSlug($this->slugger->slug($product->getName())->lower());
+        $product->setPrice(34195);
+        $product->setStock($faker->numberBetween(0, 10));
+    
+        //On va chercher une référence de catégorie
+        $category = $this->getReference('cat-'. 3);
+        $product->setCategories($category);
+
+        $this->setReference('prod-69', $product);
+        $manager->persist($product);
+
         $manager->flush();
+
+        
+        
+
     }
 }

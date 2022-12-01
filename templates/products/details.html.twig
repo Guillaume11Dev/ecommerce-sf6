@@ -9,6 +9,11 @@
         <section class="row">
             <div class="col-12">
                 <h1>{{ product.name }}</h1>
+                <h1>{{ product.stock }}</h1>
+
+                
+
+            
             </div>
             <div class="col-6">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -38,6 +43,13 @@
                 <p>{{ product.description }}</p>
                 <p>Catégorie : {{ product.categories.name }}</p>
                 <p>Prix : {{ product.price / 100 }} €</p>
+                <p>stock : {{ product.stock }} </p> 
+
+                {% if product.stock == 1 %}
+                 <p class="text-danger"> c’est votre dernière chance avant rupture de stock</p>
+                {% endif %}
+                
+
                 {% if product.stock > 0 %}
                     <a href="#" class="btn btn-success">Ajouter au panier</a>
                 {% else %}

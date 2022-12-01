@@ -21,6 +21,7 @@ class UsersFixtures extends Fixture
         $admin = new Users();
         $admin->setEmail('admin@demo.fr');
         $admin->setLastname('Gambier');
+        $admin->setTelephone("0606060606");
         $admin->setFirstname('Benoit');
         $admin->setAddress('12 rue du port');
         $admin->setZipcode('75001');
@@ -37,6 +38,7 @@ class UsersFixtures extends Fixture
         for($usr = 1; $usr <= 5; $usr++){
             $user = new Users();
             $user->setEmail($faker->email);
+            $user->setTelephone($faker->phoneNumber);
             $user->setLastname($faker->lastName);
             $user->setFirstname($faker->firstName);
             $user->setAddress($faker->streetAddress);
